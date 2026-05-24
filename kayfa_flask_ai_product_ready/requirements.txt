@@ -1,0 +1,6 @@
+flask
+langgraph
+langchain
+langchain-core
+langchain-openai
+colorama

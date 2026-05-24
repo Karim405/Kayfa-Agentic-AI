@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kayfa Agentic AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav>
+    <div class="brand">Kayfa Agentic AI</div>
+    <div>
+        <a href="/">Generate Plan</a>
+        <a href="/progress">Progress</a>
+        <a href="/about">About</a>
+    </div>
+</nav>
+
+<main class="container">
+    <section class="hero">
+        <span class="badge">LangGraph + OpenAI + Flask</span>
+        <h1>Personalized AI Learning Planner</h1>
+        <p>
+            Enter a student's goal, level, available time, and current skills.
+            The system will assess the student, select suitable content, and generate a practical weekly learning plan.
+        </p>
+    </section>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form class="card form" action="/generate" method="POST">
+        <label>Student Name</label>
+        <input type="text" name="student_name" placeholder="Ahmed Mohamed" required>
+
+        <label>Learning Goal</label>
+        <input type="text" name="student_goal" placeholder="Data Analyst, AI Engineer, Backend Developer..." required>
+
+        <label>Current Level</label>
+        <select name="student_level">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+        </select>
+
+        <label>Available Hours Per Week</label>
+        <input type="number" name="available_hours" value="10" min="1" max="80" required>
+
+        <label>Known Topics / Current Skills</label>
+        <textarea name="known_topics" placeholder="Basic Excel, Some Python basics, SQL basics"></textarea>
+
+        <button type="submit">Generate AI Learning Plan</button>
+    </form>
+</main>
+</body>
+</html>

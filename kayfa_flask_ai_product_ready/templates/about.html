@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Kayfa Agentic AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav>
+    <div class="brand">Kayfa Agentic AI</div>
+    <div>
+        <a href="/">Generate Plan</a>
+        <a href="/progress">Progress</a>
+    </div>
+</nav>
+
+<main class="container">
+    <section class="hero">
+        <span class="badge">Project Explanation</span>
+        <h1>What does this project do?</h1>
+        <p>
+            Kayfa Agentic AI is a Flask web application powered by LangGraph and OpenAI.
+            It works as a multi-agent learning planner.
+        </p>
+    </section>
+
+    <section class="grid">
+        <div class="card">
+            <h2>1. Assessment Agent</h2>
+            <p>Evaluates the student's current level, strengths, and knowledge gaps.</p>
+        </div>
+        <div class="card">
+            <h2>2. Content Agent</h2>
+            <p>Selects the most suitable courses from a simulated Kayfa Academy catalog.</p>
+        </div>
+        <div class="card">
+            <h2>3. Planning Agent</h2>
+            <p>Builds a week-by-week personalized learning plan with tasks and projects.</p>
+        </div>
+        <div class="card">
+            <h2>4. Progress Agent</h2>
+            <p>Analyzes completed lessons and quiz scores, then recommends improvements.</p>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Plan Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav>
+    <div class="brand">Kayfa Agentic AI</div>
+    <div>
+        <a href="/">Generate Plan</a>
+        <a href="/progress">Progress</a>
+        <a href="/download-json">Download JSON</a>
+    </div>
+</nav>
+
+<main class="container">
+    <section class="hero small">
+        <span class="badge">{{ result.powered_by }}</span>
+        <h1>{{ result.student.name }} — {{ result.student.goal }}</h1>
+        <p>Generated at: {{ result.generated_at }}</p>
+    </section>
+
+    <section class="grid">
+        <div class="card">
+            <h2>Assessment</h2>
+            <p><strong>Level:</strong> {{ result.assessment.current_level|upper }}</p>
+            <p><strong>Recommended Start:</strong> {{ result.assessment.recommended_starting_point }}</p>
+            <p>{{ result.assessment.assessment_summary }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Knowledge Gaps</h2>
+            <ul>
+                {% for gap in result.assessment.knowledge_gaps %}
+                <li>{{ gap }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Selected Courses</h2>
+        <div class="course-grid">
+            {% for course in result.selected_content %}
+            <div class="course">
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.category }} · {{ course.level }} · {{ course.hours }}h</p>
+                <small>{{ course.reason }}</small>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Week-by-Week Plan</h2>
+        {% for week in result.learning_plan.weekly_plan %}
+        <div class="week">
+            <h3>Week {{ week.week }} — {{ week.theme }}</h3>
+            <p><strong>Hours:</strong> {{ week.hours_this_week }}</p>
+            <ul>
+                {% for task in week.daily_tasks %}
+                <li>{{ task }}</li>
+                {% endfor %}
+            </ul>
+            {% if week.mini_project %}
+            <p><strong>Mini Project:</strong> {{ week.mini_project }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+
+    <section class="grid">
+        <div class="card">
+            <h2>Milestones</h2>
+            <ul>
+                {% for milestone in result.learning_plan.milestones %}
+                <li>{{ milestone }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Capstone Project</h2>
+            <p>{{ result.learning_plan.final_project }}</p>
+        </div>
+    </section>
+
+    {% if result.progress_report %}
+    <section class="card highlight">
+        <h2>Progress Report</h2>
+        <p><strong>Progress:</strong> {{ result.progress_report.progress_percent }}%</p>
+        <p><strong>Performance:</strong> {{ result.progress_report.performance|upper }}</p>
+        <p><strong>Message:</strong> {{ result.progress_report.motivational_message }}</p>
+
+        <h3>Recommendations</h3>
+        <ul>
+            {% for item in result.progress_report.recommendations %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
+</main>
+</body>
+</html>

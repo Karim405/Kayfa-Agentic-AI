@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Tracking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav>
+    <div class="brand">Kayfa Agentic AI</div>
+    <div>
+        <a href="/">Generate Plan</a>
+        <a href="/progress">Progress</a>
+        <a href="/about">About</a>
+    </div>
+</nav>
+
+<main class="container">
+    <section class="hero small">
+        <span class="badge">Progress Analysis</span>
+        <h1>Analyze Student Progress</h1>
+        <p>Enter completed lessons and quiz scores. The AI will generate a progress report and plan adjustments.</p>
+    </section>
+
+    <form class="card form" action="/progress" method="POST">
+        <label>Student Name</label>
+        <input type="text" name="student_name" value="{{ latest.student.name if latest else '' }}" required>
+
+        <label>Learning Goal</label>
+        <input type="text" name="student_goal" value="{{ latest.student.goal if latest else '' }}" required>
+
+        <label>Current Level</label>
+        <select name="student_level">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+        </select>
+
+        <label>Available Hours Per Week</label>
+        <input type="number" name="available_hours" value="{{ latest.student.available_hours if latest else 10 }}" min="1" max="80">
+
+        <label>Known Topics</label>
+        <textarea name="known_topics">{{ latest.student.known_topics|join(', ') if latest else '' }}</textarea>
+
+        <label>Completed Lessons / Course IDs</label>
+        <input type="text" name="completed_lessons" placeholder="py001, st001, da001">
+
+        <label>Quiz Scores</label>
+        <input type="text" name="quiz_scores" placeholder="Python Quiz:80, SQL Quiz:65, Power BI Quiz:90">
+
+        <button type="submit">Analyze Progress</button>
+    </form>
+</main>
+</body>
+</html>

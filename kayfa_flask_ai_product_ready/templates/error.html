@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav>
+    <div class="brand">Kayfa Agentic AI</div>
+    <div><a href="/">Back Home</a></div>
+</nav>
+
+<main class="container">
+    <section class="card error">
+        <h1>Something went wrong</h1>
+        <p>{{ error }}</p>
+        <p>
+            If the error says API key is missing, open <code>ai_engine.py</code>
+            and replace <code>PUT_YOUR_OPENAI_API_KEY_HERE</code> with your OpenAI API key.
+        </p>
+    </section>
+</main>
+</body>
+</html>
